@@ -18,12 +18,25 @@ words["OY"] = {}
 words["UW"] = {}
 words["UH"] = {}
 
+word_list = open("C:/Users/Peran/LyricNinja/wordlist.txt", "r")
+baseWords = []
+
+for line in word_list:
+    baseWords.append(line.rstrip('\n').upper())
+
+print(baseWords)
+
 for line in cmudict:
     segments = line.split()
     if len(segments) < 1: 
         continue
     if segments[0] == ';;;':
         continue
+    if len(segments[0]) < 3:
+        continue
+    if not segments[0] in baseWords:
+        continue
+
     num_syllables = 0
     vowel_sounds = []
     primary_stress = ""
@@ -47,17 +60,17 @@ for line in cmudict:
         primary_stress = last_stress
                 
     word = {
-        "word": segments[0],
-        "num_sounds": len(segments)-1,
-        "sounds_rev": sounds_rev,
-        "num_syllables": num_syllables,
-        "vowel_sounds_rev": vowel_sounds, 
-        "primary_stress": primary_stress,
-        "last_stress": last_stress,
-        "last_stress_pos": last_stress_pos,
+        "w": segments[0],
+        "n_so": len(segments)-1,
+        "r_so": sounds_rev,
+        "n_sy": num_syllables,
+        "v_so_r": vowel_sounds,
+        "p_stress": primary_stress,
+        "l_stress": last_stress,
+        "l_stress_pos": last_stress_pos,
     }
     # print(word)
-    words[word["last_stress"]][word["word"]] = word
+    words[word["l_stress"]][word["w"]] = word
 
 # print("printing")
 # f = open("C:/Users/Peran/LyricNinja/rhyme_dict.json",'w')
@@ -67,6 +80,6 @@ for line in cmudict:
 
 for key,value in words.items():
     print("Printing: "+key)
-    f = open("C:/Users/Peran/LyricNinja/Lyric_Ninja/src/pages/"+key+".js",'w')
-    f.write("const "+key+" = "+json.dumps(value)+";")
-    f.close
+    f = open("C:/Users/Peran/LyricNinja/Lyric_Ninja/src/assets/data/"+key+".ts", 'w')
+    f.write("export const "+key+" = "+json.dumps(value)+";")
+    f.close()
