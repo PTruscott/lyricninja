@@ -1,0 +1,123 @@
+
+@font-face{ 
+	font-family: 'Mono';
+	src: url('DejaVuSansMono.woff') format('woff'),
+         url('DejaVuSansMono.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.right {
+    float: right;
+}
+
+.chevron {
+    position: absolute;
+    font-size: 2.5em;
+    bottom: 45%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.chevron.right {
+    right: 0%;
+}
+
+.chevron-button {
+    /* font-size: 48px;
+    padding: 0px !important; */
+    height: 80%;
+    width: 25%;
+    position: absolute;
+    top: 10%;
+    left: 0%;
+}
+
+.chevron-button.right {
+    left: 75%;
+}
+
+.toolbar {
+    height: 10%;
+}
+
+.song-bar {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+}
+
+.word-bar {
+    position: absolute;
+    bottom: 45%;
+    left: 25%;
+    height: 0.1em;
+    width: 50%;
+    background: #ffecd6;
+}
+
+.progress-bar {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: .1em;
+    width: 100%;
+    background: #ffa031;
+    transform-origin: center left;
+}
+
+.main-word {
+    position: absolute;
+    width: 50%;
+    height: 1.25em;
+    left: 25%;
+    bottom: 45%;
+    text-align: center;
+    font-size: 3em;
+    /* font-family: Mono; */
+    
+}
+
+.rhymes {
+    position: absolute;
+    width: 50%;
+    height: 80%;
+    left: 25%;
+    top: 10%;
+    font-size: 2em;
+    text-align: center;
+}
+
+.words {
+    background-color: linear-gradient(#212529, #343A40 20%);
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+}
+
+p.main {
+    font-size: 3em;
+    padding-top: 0;
+}
+
+p {
+    font-size: 1.5em;
+}
+
+.remaining {
+    position: absolute;
+    bottom: 10%;
+    left: 0%;
+    font-size: large;
+    padding-left: 0.5em;
+    padding-bottom: 0.5em;
+    font-weight: 500;
+
+}
+
+.fit {
+    display: inline-block;
+    white-space: nowrap;
+  }

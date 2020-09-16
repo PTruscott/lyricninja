@@ -1,0 +1,7 @@
+{
+  "name": "Lyric_Ninja",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
