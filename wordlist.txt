@@ -192,6 +192,7 @@ assume
 assumption
 assure
 at
+ate
 athlete
 athletic
 atmosphere
