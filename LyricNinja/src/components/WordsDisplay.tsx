@@ -24,12 +24,16 @@ const WordsDisplay: React.FC<WordsDisplayProps> = ({word, visible, forward, rhym
     }
 
     useEffect(() => {
-        prevTime.current = performance.now();
+        // prevTime.current = performance.now();
 
         function render(timestamp: DOMHighResTimeStamp) {
             animationFrameHandle.current = requestAnimationFrame(render);
             let visibilityTarget = visible ? 1 : 0;
-            const secondsElapsed = Math.max((timestamp - prevTime.current) / 1000, 0);
+            // const secondsElapsed = (timestamp - prevTime.current) / 1000;
+            // console.log("Time:" + timestamp);
+            // console.log("PRev:" + prevTime.current);
+            const secondsElapsed = 1/180;
+
             
             const progress = outputValueRange * secondsElapsed / duration;
             
@@ -44,7 +48,7 @@ const WordsDisplay: React.FC<WordsDisplayProps> = ({word, visible, forward, rhym
                 cancelAnimationFrame(animationFrameHandle.current);
             }
 
-            prevTime.current = timestamp;
+            // prevTime.current = timestamp;
         }
         
         render(performance.now());

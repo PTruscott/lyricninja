@@ -43,8 +43,30 @@ const Words: React.FC<WordsProps> = () => {
 
     function getRhymes(word: object) {
         let text = word['w'];
+        let vowelSelected
+        vowels.forEach(element => {
+            // console.log(element)
+            let firstWord = element[Object.keys(element)[0]];
+            if (firstWord['l_stress'] == word['l_stress']) {
+                // console.log(firstWord['w']+" "+firstWord['l_stress']+ " "+word['w']+" "+word['l_stress']);
+                vowelSelected = element
+            }
+        }); 
+        const keys = Object.keys(vowelSelected)
+        let rhymeList = []
+        for (var i = 0; i < 8; i++) {
+            const wordIndex = (Math.floor(Math.random() * keys.length));
+            const randKey = keys[wordIndex];
+            rhymeList.push(vowelSelected[randKey]['w']);
+        }
+
+        
+        // const word1 = vowelSelected[randKey]['w'];
+        // console.log("RHyme: "+word['w']+" "+word1)
+        // console.log(vowels[0]);
         //maximum length is 10 at size 1.5em max size 2em
-        return [text+"1", text+"2", text+"3", text+"4", text+"5", text+"6", text+"7", text+"8"];
+        // return [text+"1", text+"2", text+"3", text+"4", text+"5", text+"6", text+"7", text+"8"];
+        return rhymeList;
     }
     
     function getNewWord() {
