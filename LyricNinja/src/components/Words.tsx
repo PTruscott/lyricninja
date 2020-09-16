@@ -1,98 +1,27 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import ProgressBar from './ProgressBar'
 import WordsDisplay from './WordsDisplay'
 import Chevrons from './Chevrons'
-import { AA } from '../assets/data/AA';
-import { AE } from '../assets/data/AE';
-import { AH } from '../assets/data/AH';
-import { AO } from '../assets/data/AO';
-import { AW } from '../assets/data/AW';
-import { AY } from '../assets/data/AY';
-import { EH } from '../assets/data/EH';
-import { ER } from '../assets/data/ER';
-import { EY } from '../assets/data/EY';
-import { IH } from '../assets/data/IH';
-import { IY } from '../assets/data/IY';
-import { OW } from '../assets/data/OW';
-import { OY } from '../assets/data/OY';
-import { UH } from '../assets/data/UH';
-import { UW } from '../assets/data/UW';
+import { getRhymes, getNewWord } from './WordGen'
 
 
-
-interface WordsProps {
-}
-
-
-const Words: React.FC<WordsProps> = () => {
+const Words: React.FC = () => {
     const [showFirst, setShowFirst] = useState(true);
     const [firstIndex, setFirstIndex] = useState(0);
     const [secondIndex, setSecondIndex] = useState(-1);
     const [forward, setForward] = useState(true);
     const maxWordHistory = 6;
 
-    const vowel = useRef(0);
-    const vowels = [AA, AE, AH, AH, AO, AW, AY, EH, ER, EY, IH, IY, OW, OY, UH, UW];
-
-    const [words, setWords] = useState([getNewWord(), getNewWord()]);
+    const [words, setWords] = useState([getNewWord('AA'), getNewWord('AH')]);
     const [rhymes, setRhymes] = useState([getRhymes(words[0]), getRhymes(words[1])]);
-
-    
-    
-
-    function getRhymes(word: object) {
-        let text = word['w'];
-        let vowelSelected
-        vowels.forEach(element => {
-            // console.log(element)
-            let firstWord = element[Object.keys(element)[0]];
-            if (firstWord['l_stress'] == word['l_stress']) {
-                // console.log(firstWord['w']+" "+firstWord['l_stress']+ " "+word['w']+" "+word['l_stress']);
-                vowelSelected = element
-            }
-        }); 
-        const keys = Object.keys(vowelSelected)
-        let rhymeList = []
-        for (var i = 0; i < 8; i++) {
-            const wordIndex = (Math.floor(Math.random() * keys.length));
-            const randKey = keys[wordIndex];
-            rhymeList.push(vowelSelected[randKey]['w']);
-        }
-
-        
-        // const word1 = vowelSelected[randKey]['w'];
-        // console.log("RHyme: "+word['w']+" "+word1)
-        // console.log(vowels[0]);
-        //maximum length is 10 at size 1.5em max size 2em
-        // return [text+"1", text+"2", text+"3", text+"4", text+"5", text+"6", text+"7", text+"8"];
-        return rhymeList;
-    }
-    
-    function getNewWord() {
-        vowel.current = (Math.floor(Math.random() * vowels.length));
-        const keys = Object.keys(vowels[vowel.current])
-        const wordIndex = (Math.floor(Math.random() * keys.length));
-        const randKey = keys[wordIndex];
-        const word = vowels[vowel.current][randKey];
-
-        // Select a key from the array of keys using the random index
-
-        // Use the key to get the corresponding name from the "names" object        
-
-        //maximum length is 7 at size 2em
-        //max size 3em
-
-        return word
-        // return "Universit"
-    }
 
     function forwardWord() {
         let nextFirstIndex = firstIndex;
         let nextSecondIndex = secondIndex;
         if (Math.max(secondIndex, firstIndex)+1 >= words.length) {
             const newWords = [...words];
-            const newWord = getNewWord();
+            const newWord = getNewWord(words[words.length-1]['l_stressed']);
             const newRhymes = [...rhymes];
             newRhymes.push(getRhymes(newWord));
             newWords.push(newWord);

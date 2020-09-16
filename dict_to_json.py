@@ -80,8 +80,11 @@ for line in cmudict:
 # f.write(json.dumps(words))
 # f.close()
 
-for key,value in words.items():
-    print("Printing: "+key)
-    f = open("C:/Users/Peran/LyricNinja/Lyric_Ninja/src/assets/data/"+key+".ts", 'w')
-    f.write("export const "+key+" = "+json.dumps(value)+";")
-    f.close()
+f = open("C:/Users/Peran/LyricNinja/LyricNinja/src/assets/data/words.ts", 'w')
+f.write("export const wordDict = "+json.dumps(words)+";")
+
+# for key,value in words.items():
+#     print("Printing: "+key)
+#     f = open("C:/Users/Peran/LyricNinja/Lyric_Ninja/src/assets/data/"+key+".ts", 'w')
+#     f.write("export const "+key+" = "+json.dumps(value)+";")
+#     f.close()
