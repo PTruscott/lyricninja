@@ -36,6 +36,8 @@ for line in cmudict:
         continue
     if not segments[0] in baseWords:
         continue
+    if len(segments[0]) > 10:
+        continue
 
     num_syllables = 0
     vowel_sounds = []
@@ -60,7 +62,7 @@ for line in cmudict:
         primary_stress = last_stress
                 
     word = {
-        "w": segments[0],
+        "w": segments[0].title(),
         "n_so": len(segments)-1,
         "r_so": sounds_rev,
         "n_sy": num_syllables,
